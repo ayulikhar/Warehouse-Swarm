@@ -1,0 +1,299 @@
+<?xml version="1.0"?>
+<robot name="warehouse_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Robot Properties -->
+  <xacro:property name="base_width" value="0.4"/>
+  <xacro:property name="base_length" value="0.5"/>
+  <xacro:property name="base_height" value="0.15"/>
+  <xacro:property name="wheel_radius" value="0.08"/>
+  <xacro:property name="wheel_width" value="0.05"/>
+  <xacro:property name="wheel_separation" value="0.44"/>
+  <xacro:property name="caster_radius" value="0.03"/>
+
+  <!-- Materials -->
+  <material name="blue">
+    <color rgba="0.2 0.4 0.8 1.0"/>
+  </material>
+  <material name="black">
+    <color rgba="0.1 0.1 0.1 1.0"/>
+  </material>
+  <material name="grey">
+    <color rgba="0.5 0.5 0.5 1.0"/>
+  </material>
+  <material name="red">
+    <color rgba="0.8 0.1 0.1 1.0"/>
+  </material>
+
+  <!-- Base Footprint (ground plane reference) -->
+  <link name="base_footprint"/>
+
+  <joint name="base_footprint_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <!-- Raise base_link so wheel bottoms sit at z=0 (ground) -->
+    <origin xyz="0 0 ${wheel_radius}" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Base Link (chassis center) -->
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 ${base_height/2}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${base_length} ${base_width} ${base_height}"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 ${base_height/2}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${base_length} ${base_width} ${base_height}"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 ${base_height/2}" rpy="0 0 0"/>
+      <mass value="10.0"/>
+      <!-- Box inertia: ixx=(m/12)*(h^2+d^2), iyy=(m/12)*(w^2+d^2), izz=(m/12)*(w^2+h^2) -->
+      <!-- w=0.4, l=0.5, h=0.15 => ixx=(10/12)*(0.15^2+0.5^2)=0.229, iyy=(10/12)*(0.4^2+0.5^2)=0.342, izz=(10/12)*(0.4^2+0.15^2)=0.152 -->
+      <inertia
+        ixx="0.229" ixy="0.0" ixz="0.0"
+        iyy="0.342" iyz="0.0"
+        izz="0.152"/>
+    </inertial>
+  </link>
+
+  <!-- Left Rear Drive Wheel -->
+  <link name="left_wheel">
+    <visual>
+      <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.0"/>
+      <!-- Cylinder (axis Y after rpy pi/2 0 0): ixx=iyy=(m/12)*(3r^2+h^2), izz=(m/2)*r^2 -->
+      <!-- r=0.08, h=0.05 => ixx=iyy=(1/12)*(3*0.0064+0.0025)=0.00181, izz=(1/2)*0.0064=0.0032 -->
+      <inertia
+        ixx="0.00181" ixy="0.0" ixz="0.0"
+        iyy="0.00181" iyz="0.0"
+        izz="0.0032"/>
+    </inertial>
+  </link>
+
+  <!-- Left wheel is at the REAR of the robot (negative x) -->
+  <joint name="left_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="left_wheel"/>
+    <!-- Rear position: x = -(base_length/4), y = +wheel_separation/2, z = 0 (wheel axis at base_link height) -->
+    <origin xyz="${-base_length/4} ${wheel_separation/2} 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.1" friction="0.1"/>
+  </joint>
+
+  <!-- Right Rear Drive Wheel -->
+  <link name="right_wheel">
+    <visual>
+      <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.0"/>
+      <inertia
+        ixx="0.00181" ixy="0.0" ixz="0.0"
+        iyy="0.00181" iyz="0.0"
+        izz="0.0032"/>
+    </inertial>
+  </link>
+
+  <!-- Right wheel is at the REAR of the robot (negative x) -->
+  <joint name="right_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="right_wheel"/>
+    <!-- Rear position: x = -(base_length/4), y = -wheel_separation/2, z = 0 -->
+    <origin xyz="${-base_length/4} ${-wheel_separation/2} 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.1" friction="0.1"/>
+  </joint>
+
+  <!-- Front Caster Wheel (passive, low friction sphere) -->
+  <link name="front_caster">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="${caster_radius}"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="${caster_radius}"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.2"/>
+      <!-- Sphere: ixx=iyy=izz=(2/5)*m*r^2 = (2/5)*0.2*0.0009 = 0.000072 -->
+      <inertia
+        ixx="0.000072" ixy="0.0" ixz="0.0"
+        iyy="0.000072" iyz="0.0"
+        izz="0.000072"/>
+    </inertial>
+  </link>
+
+  <!-- Front caster at the FRONT of the robot (positive x) -->
+  <!-- z offset: caster bottom must touch ground => z = -(wheel_radius - caster_radius) -->
+  <joint name="front_caster_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="front_caster"/>
+    <origin xyz="${base_length/4} 0 ${-(wheel_radius - caster_radius)}" rpy="0 0 0"/>
+  </joint>
+
+  <!-- LiDAR Link -->
+  <link name="lidar_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.04" length="0.06"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.04" length="0.06"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.1"/>
+      <inertia
+        ixx="0.0001" ixy="0.0" ixz="0.0"
+        iyy="0.0001" iyz="0.0"
+        izz="0.0001"/>
+    </inertial>
+  </link>
+
+  <joint name="lidar_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="lidar_link"/>
+    <origin xyz="0.1 0 ${base_height + 0.03}" rpy="0 0 0"/>
+  </joint>
+
+  <!-- ============================================================ -->
+  <!-- Gazebo Classic Plugins                                        -->
+  <!-- ============================================================ -->
+
+  <!-- Differential Drive Plugin -->
+  <gazebo>
+    <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+      <ros>
+        <namespace>/</namespace>
+        <remapping>cmd_vel:=cmd_vel</remapping>
+        <remapping>odom:=odom</remapping>
+      </ros>
+
+      <!-- Wheel joints (rear drive wheels only) -->
+      <left_joint>left_wheel_joint</left_joint>
+      <right_joint>right_wheel_joint</right_joint>
+
+      <!-- Geometry — must match xacro properties -->
+      <wheel_separation>${wheel_separation}</wheel_separation>
+      <wheel_diameter>${2 * wheel_radius}</wheel_diameter>
+
+      <!-- Torque and acceleration limits -->
+      <max_wheel_torque>20</max_wheel_torque>
+      <max_wheel_acceleration>1.0</max_wheel_acceleration>
+
+      <!-- Odometry -->
+      <publish_odom>true</publish_odom>
+      <publish_odom_tf>true</publish_odom_tf>
+      <publish_wheel_tf>false</publish_wheel_tf>
+      <odometry_frame>odom</odometry_frame>
+      <robot_base_frame>base_footprint</robot_base_frame>
+    </plugin>
+  </gazebo>
+
+  <!-- Gazebo material / friction for drive wheels -->
+  <gazebo reference="left_wheel">
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="right_wheel">
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <!-- Front caster: near-zero friction so it slides freely -->
+  <gazebo reference="front_caster">
+    <mu1>0.01</mu1>
+    <mu2>0.01</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
+  <!-- Chassis color in Gazebo -->
+  <gazebo reference="base_link">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
+  <!-- LiDAR sensor plugin -->
+  <gazebo reference="lidar_link">
+    <sensor type="ray" name="lidar_sensor">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>true</visualize>
+      <update_rate>10</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>360</samples>
+            <resolution>1</resolution>
+            <min_angle>-3.14159</min_angle>
+            <max_angle>3.14159</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.1</min>
+          <max>10.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="gazebo_ros_lidar" filename="libgazebo_ros_ray_sensor.so">
+        <ros>
+          <remapping>~/out:=scan</remapping>
+        </ros>
+        <output_type>sensor_msgs/LaserScan</output_type>
+        <frame_name>lidar_link</frame_name>
+      </plugin>
+    </sensor>
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+</robot>
