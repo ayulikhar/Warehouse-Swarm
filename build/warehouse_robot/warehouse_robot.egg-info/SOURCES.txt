@@ -13,5 +13,6 @@ resource/warehouse_robot
 urdf/warehouse_robot.urdf.xacro
 warehouse_robot/__init__.py
 warehouse_robot/obstacle_avoidance_node.py
+warehouse_robot/swarm_controller_node.py
 warehouse_robot/warehouse_robot_node.py
 worlds/warehouse.world

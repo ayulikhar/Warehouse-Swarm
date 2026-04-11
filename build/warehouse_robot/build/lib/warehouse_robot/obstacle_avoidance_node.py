@@ -38,10 +38,12 @@ class ObstacleAvoidanceNode(Node):
         self.turn_direction = 1  # 1 = left, -1 = right
 
         # Publishers and Subscribers
-        self.cmd_vel_pub = self.create_publisher(Twist, '/cmd_vel', 10)
+        # Use relative topic names so ROS2 namespace + remappings work correctly.
+        # The launch file remaps 'cmd_vel' -> '/robotN/cmd_vel' and 'scan' -> '/robotN/scan'.
+        self.cmd_vel_pub = self.create_publisher(Twist, 'cmd_vel', 10)
         self.scan_sub = self.create_subscription(
             LaserScan,
-            '/scan',
+            'scan',
             self.scan_callback,
             10
         )

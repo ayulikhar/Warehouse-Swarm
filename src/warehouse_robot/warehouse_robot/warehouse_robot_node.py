@@ -96,29 +96,29 @@ def generate_launch_description():
     )
 
     # ------------------ NODES ------------------
-    node1 = TimerAction(
-        period=8.0,
-        actions=[
-            Node(
-                package='warehouse_robot',
-                executable='obstacle_avoidance_node',
-                namespace='robot1',
-                output='screen'
-            )
-        ]
-    )
+#    node1 = TimerAction(
+#        period=8.0,
+#        actions=[
+#            Node(
+#                package='warehouse_robot',
+#                executable='obstacle_avoidance_node',
+#                namespace='robot1',
+#                output='screen'
+#            )
+#        ]
+#    )
 
-    node2 = TimerAction(
-        period=8.0,
-        actions=[
-            Node(
-                package='warehouse_robot',
-                executable='obstacle_avoidance_node',
-                namespace='robot2',
-                output='screen'
-            )
-        ]
-    )
+#    node2 = TimerAction(
+#        period=8.0,
+#        actions=[
+#            Node(
+#                package='warehouse_robot',
+#                executable='obstacle_avoidance_node',
+#                namespace='robot2',
+#                output='screen'
+#            )
+#        ]
+#    )
 
     return LaunchDescription([
         gazebo_launch,
@@ -126,6 +126,6 @@ def generate_launch_description():
         robot2_rsp,
         spawn_robot1,
         spawn_robot2,
-        node1,
-        node2,
+#        node1,
+#        node2,
     ])

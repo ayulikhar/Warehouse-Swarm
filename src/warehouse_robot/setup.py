@@ -35,6 +35,7 @@ setup(
     entry_points={
         'console_scripts': [
             'obstacle_avoidance_node = warehouse_robot.obstacle_avoidance_node:main',
+            'swarm_controller_node = warehouse_robot.swarm_controller_node:main',
         ],
     },
 )

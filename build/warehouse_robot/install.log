@@ -1,7 +1,9 @@
 /home/ayu/warehouse_robot_ws/install/warehouse_robot/lib/python3.10/site-packages/warehouse_robot/warehouse_robot_node.py
+/home/ayu/warehouse_robot_ws/install/warehouse_robot/lib/python3.10/site-packages/warehouse_robot/swarm_controller_node.py
 /home/ayu/warehouse_robot_ws/install/warehouse_robot/lib/python3.10/site-packages/warehouse_robot/__init__.py
 /home/ayu/warehouse_robot_ws/install/warehouse_robot/lib/python3.10/site-packages/warehouse_robot/obstacle_avoidance_node.py
 /home/ayu/warehouse_robot_ws/install/warehouse_robot/lib/python3.10/site-packages/warehouse_robot/__pycache__/warehouse_robot_node.cpython-310.pyc
+/home/ayu/warehouse_robot_ws/install/warehouse_robot/lib/python3.10/site-packages/warehouse_robot/__pycache__/swarm_controller_node.cpython-310.pyc
 /home/ayu/warehouse_robot_ws/install/warehouse_robot/lib/python3.10/site-packages/warehouse_robot/__pycache__/__init__.cpython-310.pyc
 /home/ayu/warehouse_robot_ws/install/warehouse_robot/lib/python3.10/site-packages/warehouse_robot/__pycache__/obstacle_avoidance_node.cpython-310.pyc
 /home/ayu/warehouse_robot_ws/install/warehouse_robot/share/ament_index/resource_index/packages/warehouse_robot
@@ -17,3 +19,4 @@
 /home/ayu/warehouse_robot_ws/install/warehouse_robot/lib/python3.10/site-packages/warehouse_robot-0.1.0-py3.10.egg-info/requires.txt
 /home/ayu/warehouse_robot_ws/install/warehouse_robot/lib/python3.10/site-packages/warehouse_robot-0.1.0-py3.10.egg-info/PKG-INFO
 /home/ayu/warehouse_robot_ws/install/warehouse_robot/lib/warehouse_robot/obstacle_avoidance_node
+/home/ayu/warehouse_robot_ws/install/warehouse_robot/lib/warehouse_robot/swarm_controller_node
