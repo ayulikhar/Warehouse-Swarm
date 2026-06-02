@@ -1,5 +1,0 @@
-  File "/home/ayu/warehouse_robot_ws/install/warehouse_robot/lib/python3.10/site-packages/warehouse_robot/swarm_controller_node.py", line 1
-    ```python
-    ^
-SyntaxError: invalid syntax
-

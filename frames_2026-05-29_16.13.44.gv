@@ -1,0 +1,18 @@
+digraph G {
+"robot1_base_footprint" -> "robot1_base_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"robot1/odom" -> "robot1_base_footprint"[label=" Broadcaster: default_authority\nAverage rate: 90.726\nBuffer length: 4.96\nMost recent transform: 127.12\nOldest transform: 122.16\n"];
+"robot1_base_link" -> "robot1_front_caster"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"robot1_base_link" -> "robot1_lidar_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"robot3_base_footprint" -> "robot3_base_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"robot3/odom" -> "robot3_base_footprint"[label=" Broadcaster: default_authority\nAverage rate: 100.202\nBuffer length: 4.96\nMost recent transform: 127.113\nOldest transform: 122.153\n"];
+"robot3_base_link" -> "robot3_front_caster"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"robot3_base_link" -> "robot3_lidar_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"robot2/odom" -> "robot2_base_footprint"[label=" Broadcaster: default_authority\nAverage rate: 90.342\nBuffer length: 4.97\nMost recent transform: 127.122\nOldest transform: 122.152\n"];
+"robot2_base_footprint" -> "robot2_base_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"robot2_base_link" -> "robot2_front_caster"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"robot2_base_link" -> "robot2_lidar_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1780051424.6571321"[ shape=plaintext ] ;
+}->"robot2/odom";
+}

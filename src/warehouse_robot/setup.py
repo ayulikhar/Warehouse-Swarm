@@ -36,6 +36,7 @@ setup(
         'console_scripts': [
             'obstacle_avoidance_node = warehouse_robot.obstacle_avoidance_node:main',
             'swarm_controller_node = warehouse_robot.swarm_controller_node:main',
+            'goal_navigation_node = warehouse_robot.goal_navigation_node:main',
         ],
     },
 )

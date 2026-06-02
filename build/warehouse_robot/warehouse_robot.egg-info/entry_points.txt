@@ -1,4 +1,5 @@
 [console_scripts]
+goal_navigation_node = warehouse_robot.goal_navigation_node:main
 obstacle_avoidance_node = warehouse_robot.obstacle_avoidance_node:main
 swarm_controller_node = warehouse_robot.swarm_controller_node:main
 
