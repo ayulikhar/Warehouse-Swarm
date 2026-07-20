@@ -12,8 +12,16 @@ The system demonstrates how multiple autonomous robots can:
 
 The architecture is modular, enabling **comparison between different coordination paradigms** under identical conditions.
 
----
+# Demo
+<img width="400" height="225" alt="warehouse (1)" src="https://github.com/user-attachments/assets/3d7ddecb-b12f-4019-ad4a-5e3980709d0f" />
 
+
+---
+## 🔀 Repository Branch Guide
+The `main` branch contains the foundational single-agent navigation stack. To explore the specific multi-agent coordination frameworks developed in this project, switch to the respective architectural branches:
+
+* **[`feature/leader-follower`](https://github.com/ayulikhar/Warehouse-Swarm/tree/feature/leader-follower)**: Implements decentralized leader-follower dynamics and platooning matrices.
+* **[`feature/swarm-flocking`](https://github.com/ayulikhar/Warehouse-Swarm/tree/feature/swarm-flocking)**: Contains the constraint-aware local navigation nodes for large-scale swarm flocking.
 ## Features
 
 ### Swarm Intelligence (Flocking)
