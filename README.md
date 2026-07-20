@@ -16,7 +16,7 @@ The architecture is modular, enabling **comparison between different coordinatio
 
 ## Features
 
-### 🐝 Swarm Intelligence (Flocking)
+### Swarm Intelligence (Flocking)
 
 * Boids-inspired decentralized control:
 
@@ -28,7 +28,7 @@ The architecture is modular, enabling **comparison between different coordinatio
 
 ---
 
-### 🚧 Constraint-Aware Navigation
+### Constraint-Aware Navigation
 
 * LiDAR-based obstacle detection
 * Priority-based control override for safety
@@ -36,7 +36,7 @@ The architecture is modular, enabling **comparison between different coordinatio
 
 ---
 
-### 🚗 Formation Control (Platooning)
+### Formation Control (Platooning)
 
 * Leader–Follower chain topology:
 
@@ -135,12 +135,9 @@ ros2 run warehouse_robot platooning_node
 
 
 
-## 🤝 Acknowledgements
+## Acknowledgements
 
 Built as part of ongoing exploration in **multi-agent systems, robotics, and AI-driven coordination**.
 
 ---
 
-## 📬 Contact
-
-For collaboration or research opportunities, feel free to connect.
