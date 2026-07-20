@@ -104,13 +104,13 @@ ros2 launch warehouse_robot warehouse_robot.launch.py
 
 ### 3. Run Desired Behavior
 
-#### 🐝 Swarm (Flocking)
+#### Swarm (Flocking)
 
 ```bash
 ros2 run warehouse_robot swarm_controller_node
 ```
 
-#### 🚗 Platooning (Leader–Follower)
+#### Platooning (Leader–Follower)
 
 ```bash
 ros2 run warehouse_robot platooning_node
